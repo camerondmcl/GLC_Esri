@@ -39,8 +39,16 @@ def write_csv(mxd, lyrs):
 # Find the parent directory for a gdb using:
 def gdb_parent(path):
     gdbIdx = path.find('.gdb')
-    gdbPartial = path[:gdbIdx]
-    return os.path.dirname(gdbPartial)
+    if gdbIdx == -1:
+        return path
+    else:
+        gdbPartial = path[:gdbIdx]
+        return os.path.dirname(gdbPartial)
+
+# def gdb_parent(path):
+#     gdbIdx = path.find('.gdb')
+#     gdbPartial = path[:gdbIdx]
+#     return os.path.dirname(gdbPartial)
 
 # Format the EsriCatalog.csv using the following fields:
 #   Map Document, Layer Name, Data Source, Date Accessed
