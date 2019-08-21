@@ -1,8 +1,3 @@
-# The proposed function will have two inputs:
-#   1) Map Document path
-#   2) dictionary containing {dataSource: name} for each layer
-#
-# For each unique parent directory path, add or append to a file named 'EsriCatalog.csv'
 
 import os
 import csv
@@ -40,20 +35,6 @@ def write_csv(mxd, lyrs):
                 for k in lyrs_lst:
                     csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
 
-# def write_csv(mxd, lyrs):
-#     lyrs_lst = lyrs.keys()
-#     with open(CSV_FNAME, 'a+') as csv_f:
-#         try:
-#             #runs if the CSV already existed (and therefore already has the header)
-#             csv.reader(csv_f).next()
-#             for k in lyrs_lst:
-#                 csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
-#         except StopIteration:
-#             #runs if the CSV was just created and doesn't have the header yet)
-#             csv_f.write('Map Document,Layer Name,Data Source,Date Accessed\n')
-#             for k in lyrs_lst:
-#                 csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
-
 # File Geodatabases appear as a directory but cannot be used in the same way.
 # Find the parent directory for a gdb using:
 def gdb_parent(path):
@@ -70,7 +51,7 @@ def gdb_parent(path):
 #   Date Accessed - timestamp (now)
 
 #testing write_csv
-write_csv(mxd0, lyrs0)
-write_csv(mxd1, lyrs1)
-write_csv(mxd2, lyrs2)
-write_csv(mxd3, lyrs3)
+# write_csv(mxd0, lyrs0)
+# write_csv(mxd1, lyrs1)
+# write_csv(mxd2, lyrs2)
+# write_csv(mxd3, lyrs3)
