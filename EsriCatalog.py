@@ -21,20 +21,38 @@ lyrs1 = {'C:\\TestPath\\Documents\\BRCS\\StreamTraces.gdb\\BRCS_Downstream170515
 mxd2 = 'C:\\Data\\MI_NHD.mxd'
 lyrs2 = {'C:\\Data\\NHD_H_Michigan_GDB.gdb\\Hydro_GeoRef\\Barrier_MI': 'Barrier_MI', 'C:\\Data\\NHD_H_Michigan_GDB.gdb\\Hydro_GeoRef\\NHDFlowline_3078': 'NHDFlowline_3078', 'C:\\Data\\NHD_H_Michigan_GDB.gdb\\Hydro_GeoRef\\Hydro_GeoRef_Net_Junctions': 'Hydro_GeoRef_Net_Junctions'}
 
+mxd3 = 'C:\\Data\\MapWithoutGDB.mxd'
+lyrs3 = {'C:\\TestPath\\Documents\\BRCS\\Map_Without_GDB\\No_GDB_Data\\No_GDB_Test_Data': 'No_GDB_Test_Data'}
+
 # Create a function write_csv(mxd, lyrs)
 def write_csv(mxd, lyrs):
     lyrs_lst = lyrs.keys()
-    with open(CSV_FNAME, 'a+') as csv_f:
-        try:
-            #runs if the CSV already existed (and therefore already has the header)
-            csv.reader(csv_f).next()
-            for k in lyrs_lst:
+    for k in lyrs_lst:
+        os.chdir(gdb_parent(k))
+        with open(CSV_FNAME, 'a+') as csv_f:
+            try:
+                #runs if the CSV already existed (and therefore already has the header)
+                csv.reader(csv_f).next()
                 csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
-        except StopIteration:
-            #runs if the CSV was just created and doesn't have the header yet)
-            csv_f.write('Map Document,Layer Name,Data Source,Date Accessed\n')
-            for k in lyrs_lst:
-                csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
+            except StopIteration:
+                #runs if the CSV was just created and doesn't have the header yet)
+                csv_f.write('Map Document,Layer Name,Data Source,Date Accessed\n')
+                for k in lyrs_lst:
+                    csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
+
+# def write_csv(mxd, lyrs):
+#     lyrs_lst = lyrs.keys()
+#     with open(CSV_FNAME, 'a+') as csv_f:
+#         try:
+#             #runs if the CSV already existed (and therefore already has the header)
+#             csv.reader(csv_f).next()
+#             for k in lyrs_lst:
+#                 csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
+#         except StopIteration:
+#             #runs if the CSV was just created and doesn't have the header yet)
+#             csv_f.write('Map Document,Layer Name,Data Source,Date Accessed\n')
+#             for k in lyrs_lst:
+#                 csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
 
 # File Geodatabases appear as a directory but cannot be used in the same way.
 # Find the parent directory for a gdb using:
@@ -55,3 +73,4 @@ def gdb_parent(path):
 write_csv(mxd0, lyrs0)
 write_csv(mxd1, lyrs1)
 write_csv(mxd2, lyrs2)
+write_csv(mxd3, lyrs3)
