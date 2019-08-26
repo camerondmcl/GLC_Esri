@@ -28,12 +28,11 @@ def write_csv(mxd, lyrs):
         f_path = '{}\\{}'.format(gdb_path, CSV_FNAME)
         if path.exists(f_path):
             with open(CSV_FNAME, 'a') as csv_f:
-            csv.reader(csv_f).next()
-            csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
+                csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
         else:
             with open(CSV_FNAME, 'w') as csv_f:
-            csv_f.write('Map Document,Layer Name,Data Source,Date Accessed\n')
-            csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
+                csv_f.write('Map Document,Layer Name,Data Source,Date Accessed\n')
+                csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
 
 # File Geodatabases appear as a directory but cannot be used in the same way.
 # Find the parent directory for a gdb using:
@@ -58,3 +57,5 @@ def gdb_parent(path):
 # write_csv(mxd1, lyrs1)
 # write_csv(mxd2, lyrs2)
 # write_csv(mxd3, lyrs3)
+
+# print gdb_parent('C:\\TestPath\\Documents\\BRCS\\StreamTraces.gdb\\BRCS_Downstream170515')
