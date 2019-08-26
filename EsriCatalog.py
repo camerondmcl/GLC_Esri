@@ -58,4 +58,4 @@ def gdb_parent(path):
 # write_csv(mxd2, lyrs2)
 # write_csv(mxd3, lyrs3)
 
-# print gdb_parent('C:\\TestPath\\Documents\\BRCS\\StreamTraces.gdb\\BRCS_Downstream170515')
+# print '{}\\{}'.format(gdb_parent('C:\\TestPath\\Documents\\BRCS\\StreamTraces.gdb\\BRCS_Downstream170515'), CSV_FNAME)
