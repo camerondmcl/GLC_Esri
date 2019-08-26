@@ -26,7 +26,7 @@ def write_csv(mxd, lyrs):
         gdb_path = gdb_parent(k)
         os.chdir(gdb_path)
         f_path = '{}\\{}'.format(gdb_path, CSV_FNAME)
-        if path.exists(f_path):
+        if os.path.exists(f_path):
             with open(CSV_FNAME, 'a') as csv_f:
                 csv_f.write('{},{},{},{}\n'.format(mxd, lyrs[k], k, datetime.datetime.now()))
         else:
